@@ -68,7 +68,6 @@ SET default_tablespace = '';
 CREATE TABLE rsmartinez.franchise_fee (
     fran_fee_amount integer NOT NULL,
     fran_fee_receipt integer NOT NULL,
-    fran_id integer DEFAULT nextval('rsmartinez.franchise_fee_fran_id_seq'::regclass) NOT NULL,
     id integer DEFAULT nextval('rsmartinez.franchise_fee_id_seq'::regclass) NOT NULL
 );
 
@@ -118,8 +117,7 @@ CREATE TABLE rsmartinez.franchisee (
     fran_address character varying(20) NOT NULL,
     fran_salary integer NOT NULL,
     fran_email character varying(20) NOT NULL,
-    fran_num integer,
-    fran_id integer DEFAULT nextval('rsmartinez.franchisee_fran_id_seq'::regclass) NOT NULL
+    fran_num integer
 );
 
 
@@ -130,18 +128,6 @@ ALTER TABLE rsmartinez.franchisee OWNER TO datama2mi182;
 -- Name: franchisee_fran_fee; Type: VIEW; Schema: rsmartinez; Owner: datama2mi182
 --
 
-CREATE VIEW rsmartinez.franchisee_fran_fee AS
- SELECT franchisee.id,
-    franchisee.fran_fname,
-    franchisee.fran_lname,
-    franchisee.fran_salary,
-    franchise_fee.fran_id,
-    franchise_fee.fran_fee_amount
-   FROM (rsmartinez.franchisee
-     JOIN rsmartinez.franchise_fee ON ((franchisee.fran_id = franchise_fee.fran_id)));
-
-
-ALTER TABLE rsmartinez.franchisee_fran_fee OWNER TO datama2mi182;
 
 --
 -- TOC entry 4049 (class 0 OID 21107)
